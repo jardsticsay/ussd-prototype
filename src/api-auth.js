@@ -6,10 +6,12 @@ var xhr = new  XMLHttpRequest();
 var a;
 var breakLine = null;
 var dataToPass = JSON.stringify({
-    "method":"select",
+    "method":"getlist",
         "data":{
             "table":"keyword",
-            "returnID":"1"
+            "fieldName":"mainkeyword",
+            "operator":"=",
+            "lookup":"*121#"
         }
 });
 var ussdcode;
@@ -68,8 +70,24 @@ $(function (){
             console.log(textStatus,errorThrown)
         },
     });
-    console.log(a);
-    console.log(ussdcode);
 });
 
 
+var insert_record = function(){
+    $.ajax({
+        type: "POST",
+        url: apiUrl,
+        contentType:"json",
+        data:JSON.stringify({
+            "method":"insert",
+                "data":{
+                    "table":"keyword"
+                }
+        }),
+        beforeSend : function(xhr){
+            console.log('beforeSend');
+            xhr.setRequestHeader ("Basic", btoa(username + ":" + password));
+            xhr.setRequestHeader ("Action", actionPoint);
+        },
+    })
+}
