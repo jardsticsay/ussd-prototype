@@ -13,7 +13,7 @@ var dataToPass = JSON.stringify({
         }
 });
 var ussdcode;
-var errors = ["Loadding..", "Loading..", "Loading.."]
+var errors = "Loading content..."
 
 
 $(function (){
@@ -97,8 +97,14 @@ $(function (){
                         $('#choiceCode2').hide();
                         $('#choiceCode3').show();
                         if ($('#choiceCode3').val() == '1' ){
-                            alert('Wait for a confirmation text shortly');
+                            alert('Wait for a text confirmation shortly');
                             location.reload();
+                        }
+                        else if($('#choiceCode3').val() == '0'){
+                            menu2Call();
+                            $('#choiceCode2').show();
+                            $('#choiceCode3').hide();
+                            $('#choiceCode2').val('');
                         }
                     }
                     else if($('#choiceCode2').val() == '2'){
@@ -106,8 +112,22 @@ $(function (){
                         $('#choiceCode2').hide();
                         $('#choiceCode3').show();
                         if ($('#choiceCode3').val() == '1' ){
-                            alert('Wait for a confirmation text shortly');
+                            alert('Wait for a text confirmation shortly');
                         }
+                        else if($('#choiceCode3').val() == '0'){
+                            menu2Call();
+                            $('#choiceCode2').val('');
+                            $('#choiceCode2').show();
+                            $('#choiceCode3').hide();
+                        }
+                    }
+                    
+                    else if($('#choiceCode2').val() == '0'){
+                            $('#choiceCode').val('');
+                            $('#choiceCode2').val('');
+                            $('#choiceCode').show();
+                            $('#choiceCode2').hide();
+                            menuCall();
                     }
                     
                 }
@@ -136,7 +156,8 @@ $(function (){
             
         },
         error: function(jqXHR,textStatus,errorThrown) {
-            console.log(textStatus,errorThrown)
+            console.log(textStatus,errorThrown);
+            $('.firstMenu').html(errors);
         },
     });
 
@@ -255,26 +276,32 @@ $(function (){
                 $('.firstMenu').html(nextLine);
                 $('.entryPoint').html(headerSplit);
                 $('.loader').hide();
-                if ($('#choiceCode2').val() == key11 ){
-                    menu11Call();
-                    $('#choiceCode2').hide();
-                    $('#choiceCode3').show();
-                    if ($('#choiceCode3').val() == '1' ){
-                        alert('Wait for a confirmation text shortly');
-                        location.reload();
-                    }
-                }
-                else if($('#choiceCode2').val() == key22 ){
-                    menu12Call();
-                    $('#choiceCode2').hide();
-                    $('#choiceCode3').show();
-                    if ($('#choiceCode3').val() == '1' ){
-                        alert('Wait for a confirmation text shortly');
-                    }
-                }
-                else {
-                    alert('wrong choice')
-                }
+                // if ($('#choiceCode2').val() == key11 ){
+                //     $('#choiceCode2').hide();
+                //     $('#choiceCode3').show();
+                //     menu11Call();
+                //     if ($('#choiceCode3').val() == '1' ){
+                //         alert('You'+ "'" +'ll receive a text confirmation shortly');
+                //         location.reload();
+                //     }
+                // }
+                // else if($('#choiceCode2').val() == key22 ){
+                //     menu12Call();
+                //     $('#choiceCode2').hide();
+                //     $('#choiceCode3').show();
+                //     if ($('#choiceCode3').val() == '1' ){
+                //         alert('Wait for a confirmation text shortly');
+                //     }
+                // }
+                // else if($('#choiceCode2').val() == '0'){
+                //     $('#choiceCode').val('');
+                //     $('#choiceCode2').val('');
+                //     $('#choiceCode').show();
+                //     $('#choiceCode2').hide();
+                //     menuCall();
+                // }
+                
+                
             },
             error: function(jqXHR,textStatus){
                 console.log(textStatus);
@@ -583,7 +610,7 @@ $(function (){
                 "method":"select",
                     "data":{
                         "table":"keyword",
-                        "returnID":"17"
+                        "returnID":"18"
                     }
             }),
             beforeSend : function(xhr){
@@ -607,6 +634,26 @@ $(function (){
     
 });
 
+/* DETECT IDLE TIME */
+var idleTime = 0;
+$(document).ready(function () {
+    var idleInterval = setInterval(timerIncrement, 30000); // 30 seconds
+    $(this).mousemove(function (e) {
+        idleTime = 0;
+    });
+    $(this).keypress(function (e) {
+        idleTime = 0;
+    });
+});
+
+function timerIncrement() {
+    idleTime = idleTime + 1;
+    if (idleTime > 1) {
+        alert('Connection problem, idle for a period time. Refresh page');
+        window.location.reload();
+    }
+}
+/* END OF DETECT IDLE TIME */
 
 var insert_record = function(){
     $.ajax({
