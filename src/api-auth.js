@@ -635,24 +635,24 @@ $(function (){
 });
 
 /* DETECT IDLE TIME */
-var idleTime = 0;
-$(document).ready(function () {
-    var idleInterval = setInterval(timerIncrement, 30000); // 30 seconds
-    $(this).mousemove(function (e) {
-        idleTime = 0;
-    });
-    $(this).keypress(function (e) {
-        idleTime = 0;
-    });
-});
+// var idleTime = 0;
+// $(document).ready(function () {
+//     var idleInterval = setInterval(timerIncrement, 30000); // 30 seconds
+//     $(this).mousemove(function (e) {
+//         idleTime = 0;
+//     });
+//     $(this).keypress(function (e) {
+//         idleTime = 0;
+//     });
+// });
 
-function timerIncrement() {
-    idleTime = idleTime + 1;
-    if (idleTime > 1) {
-        alert('Connection problem, idle for a period time. Refresh page');
-        window.location.reload();
-    }
-}
+// function timerIncrement() {
+//     idleTime = idleTime + 1;
+//     if (idleTime > 1) {
+//         alert('Connection problem, idle for a period time. Refresh page');
+//         window.location.reload();
+//     }
+// }
 /* END OF DETECT IDLE TIME */
 
 var insert_record = function(){
