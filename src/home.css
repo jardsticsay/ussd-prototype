@@ -1,13 +1,32 @@
 
 
 .ussd-container {
-    width:300px;
+    width:17%;
     margin: 0% auto;
 }
 div#content-container2 {
     /* display:none; */
 }
+#choiceCode2, #choiceCode3{
+  display:none;
+}
+input {
+  border:none;
+  border-bottom:2px solid #4498bd;
+}
 
+input:focus{
+  outline:none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+  -moz-appearance:textfield; /* Firefox */
+}
 /* Dashboard */
 
 
@@ -73,4 +92,28 @@ body{
     .header-right {
       float: none;
     }
+  }
+
+  /* Loading */
+  .loader {
+    border: 7px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 7px solid #2dbe60;
+    width: 35px;
+    height: 35px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+    display:none;
+    position:absolute;
+    top:10%;
+    left:42%;
+  }
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
